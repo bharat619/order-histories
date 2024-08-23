@@ -8,5 +8,5 @@ class Product < ApplicationRecord
 
   # validations
   validates :name, presence: true
-  validates :code, presence: true, uniqueness: true
+  validates :code, presence: true, uniqueness: true, allow_nil: false
 end

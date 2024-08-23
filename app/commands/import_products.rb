@@ -9,12 +9,13 @@ class ImportProducts
   def call
     Rails.logger.info 'Importing products data'
     count = 0
+
     csv_data.each do |product|
       code, name, category_name = product
       next if code_exists?(code:)
 
-      category = find_or_create_category(name: category_name)
-      Product.find_or_create_by(code:, name:, category:)
+      category = find_or_create_category!(name: category_name)
+      Product.find_or_create_by!(code:, name:, category:)
       count += 1
     rescue ActiveRecord::RecordInvalid => e
       log("code: #{code}, name: #{name}, category: #{category}"\
@@ -26,8 +27,8 @@ class ImportProducts
 
   private
 
-  def find_or_create_category(name:)
-    Category.find_or_create_by(name:)
+  def find_or_create_category!(name:)
+    Category.find_or_create_by!(name:)
   end
 
   def csv_data
