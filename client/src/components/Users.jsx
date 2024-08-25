@@ -1,36 +1,23 @@
-import { useContext, useEffect, useState } from "react";
-import { API_URL } from "../constants";
-import { CableContext } from "../context/cable";
+import { useEffect, useState } from "react";
+import { get } from "../utils/fetchHelper";
+import UserRow from "./UserRow";
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const { data } = useFetch("/v1/users");
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function loadUsers() {
       try {
-        const response = await fetch(`${API_URL}/v1/users`);
-        if (response.ok) {
-          const json = await response.json();
-          setUsers(json);
-        } else {
-          throw response;
-        }
-      } catch (e) {
-        setError("An error ocurred");
-      } finally {
-        setLoading(false);
+        const response = await get("/v1/users");
+        setData(response);
+      } catch (error) {
+        console.log(error);
       }
     }
 
     loadUsers();
   }, []);
-
-  const downloadCSV = async (id) => {
-    const response = await fetch(`${API_URL}/v1/users/${id}/export_order`);
-  };
-
   return (
     <div>
       <table>
@@ -42,14 +29,8 @@ const Users = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.username}</td>
-              <td>{user.email}</td>
-              <td>
-                <button onClick={() => downloadCSV(user.id)}>Download</button>
-              </td>
-            </tr>
+          {data.map((user) => (
+            <UserRow user={user} key={user.id} />
           ))}
         </tbody>
       </table>

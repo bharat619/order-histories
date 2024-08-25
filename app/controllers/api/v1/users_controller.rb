@@ -6,7 +6,6 @@ module Api
       before_action :validate_user, only: :export_order
 
       def index
-        puts 'hello'
         @users = User.all
         render json: @users
       end
