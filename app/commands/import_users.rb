@@ -17,9 +17,8 @@ class ImportUsers
       User.create!(username:, email:, phone:)
       count += 1
     rescue ActiveRecord::RecordInvalid => e
-      log("username: #{username}, email: #{email}, phone: #{phone}"\
+      log("Could not import user. username: #{username}, email: #{email}, phone: #{phone}"\
                          "message: #{e.message}}")
-      raise ActiveRecord::Rollback
     end
     log("Finished importing #{count} / #{csv_data.size}")
   end

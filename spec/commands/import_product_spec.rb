@@ -37,8 +37,12 @@ describe ImportProducts do
       stub_const('ImportProducts::CSV_PATH', Rails.root.join('data', 'test', 'products_invalid_code.csv'))
     end
 
-    it 'does not create the product records' do
-      expect { command }.to raise_error(ActiveRecord::Rollback)
+    it 'creates valid product from the CSV' do
+      expect { command }.to change { Product.count }.by(4)
+    end
+
+    it 'creates valid category from the CSV' do
+      expect { command }.to change { Category.count }.by(3)
     end
   end
 
@@ -47,8 +51,12 @@ describe ImportProducts do
       stub_const('ImportProducts::CSV_PATH', Rails.root.join('data', 'test', 'products_invalid_name.csv'))
     end
 
-    it 'does not create the product records' do
-      expect { command }.to raise_error(ActiveRecord::Rollback)
+    it 'creates valid product from the CSV' do
+      expect { command }.to change { Product.count }.by(4)
+    end
+
+    it 'creates valid category from the CSV' do
+      expect { command }.to change { Category.count }.by(3)
     end
   end
 
@@ -57,8 +65,12 @@ describe ImportProducts do
       stub_const('ImportProducts::CSV_PATH', Rails.root.join('data', 'test', 'products_invalid_category.csv'))
     end
 
-    it 'does not create the product records' do
-      expect { command }.to raise_error(ActiveRecord::Rollback)
+    it 'creates valid product from the CSV' do
+      expect { command }.to change { Product.count }.by(4)
+    end
+
+    it 'creates valid category from the CSV' do
+      expect { command }.to change { Category.count }.by(3)
     end
   end
 end

@@ -20,8 +20,8 @@ describe ImportUsers do
       stub_const('ImportUsers::USER_CSV_PATH', Rails.root.join('data', 'test', 'users_invalid.csv'))
     end
 
-    it 'does not create the user records' do
-      expect { command }.to raise_error(ActiveRecord::Rollback)
+    it 'creates only valid CSV ' do
+      expect { command }.to change { User.count }.by(8)
     end
   end
 end

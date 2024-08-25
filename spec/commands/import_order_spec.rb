@@ -47,8 +47,8 @@ describe ImportOrders do
         stub_const('ImportOrders::CSV_PATH', Rails.root.join('data', 'test', 'order_details_invalid_date.csv'))
       end
 
-      it 'does not create the user records' do
-        expect { command }.to raise_error(ActiveRecord::Rollback)
+      it 'creates only valid records from csv' do
+        expect { command }.to change { Order.count }.by(4)
       end
     end
 
@@ -57,8 +57,8 @@ describe ImportOrders do
         stub_const('ImportOrders::CSV_PATH', Rails.root.join('data', 'test', 'order_details_empty_date.csv'))
       end
 
-      it 'does not create the user records' do
-        expect { command }.to raise_error(ActiveRecord::Rollback)
+      it 'creates only valid records from csv' do
+        expect { command }.to change { Order.count }.by(4)
       end
     end
   end

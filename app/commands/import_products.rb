@@ -18,9 +18,8 @@ class ImportProducts
       Product.find_or_create_by!(code:, name:, category:)
       count += 1
     rescue ActiveRecord::RecordInvalid => e
-      log("code: #{code}, name: #{name}, category: #{category}"\
+      log("Could not import Product. code: #{code}, name: #{name}, category: #{category}"\
                          "message: #{e.message}}")
-      raise ActiveRecord::Rollback
     end
     log("Finished importing products: #{count} / #{csv_data.size}")
   end

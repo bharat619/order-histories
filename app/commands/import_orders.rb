@@ -20,7 +20,7 @@ class ImportOrders
       Order.find_or_create_by!(user:, product:, created_at:, updated_at: created_at)
       count += 1
     rescue ActiveRecord::RecordInvalid
-      raise ActiveRecord::Rollback
+      log("Could not import order. email: #{email}, product_code: #{product_code}, created_at: #{created_at}")
     end
     log("Finished importing Orders #{count} / #{csv_data.size}")
   end
