@@ -11,7 +11,7 @@ describe ImportUsers do
     end
 
     it 'creates the user records' do
-      expect { command }.to change { User.count }.by(4)
+      expect { command }.to change { User.count }.by(5)
     end
   end
 

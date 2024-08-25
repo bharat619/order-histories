@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :posts
+
+      resources :users, only: :index do
+        member do
+          get :export_order
+        end
+      end
     end
   end
   resources :posts
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  mount ActionCable.server => '/cable'
 end

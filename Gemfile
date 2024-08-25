@@ -14,6 +14,8 @@ gem 'puma', '~> 5.0'
 
 gem 'interactor'
 
+gem 'redis'
+
 gem 'sidekiq'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
