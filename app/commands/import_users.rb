@@ -20,7 +20,7 @@ class ImportUsers
       log("Could not import user. username: #{username}, email: #{email}, phone: #{phone}"\
                          "message: #{e.message}}")
     end
-    log("Finished importing #{count} / #{csv_data.size}")
+    log("Finished importing users: #{count} / #{csv_data.size}")
   end
 
   private
