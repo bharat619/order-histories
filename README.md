@@ -17,6 +17,8 @@ A Ruby on Rails with ReactJS application which imports data (users, products and
 The data folder has sample `order_details.csv`, `products.csv` and `users.csv`. For different data, make sure to have respective file names and data similar to the sample.
 Ignore the `csv` files under the test as they are for unit test case.
 
+Run the rake `rake 'application_data:load_data'` whenever the CSV files are updated.
+
 #### Rules for CSV:
 - `users.csv` needs to have `USERNAME`, `EMAIL` and `PHONE`. The username and email is mandatory.
 - `products.csv` needs to have `CODE`, `NAME`, `CATEGORY`. The code, name and category is mandatory.
